@@ -27,9 +27,8 @@ def add_contact(args, contacts):
 def change_contact(args, contacts):
     """Update an existing contact's phone number."""
     name, phone = args
-    if name not in contacts:
-        raise KeyError
-    contacts[name] = phone
+    if contacts[name]:  
+        contacts[name] = phone
     return "Contact updated."
 
 
@@ -37,8 +36,6 @@ def change_contact(args, contacts):
 def show_phone(args, contacts):
     """Retrieve and return the phone number for a given contact name."""
     name = args[0]
-    if name not in contacts:
-        raise KeyError
     return f"{name}: {contacts[name]}"
 
 
@@ -93,26 +90,29 @@ def main():
 # ==========================================
 if __name__ == "__main__":
     # You can uncomment main() to run the interactive bot:
-    # main()
+    main()
     
-    test_contacts = {}
+    # test_contacts = {}
     
-    print("--- Running Tests ---")
+    # print("--- Running Tests ---")
     
-    # Test 1: Successful addition
-    print(add_contact(["Bob", "0501234356"], test_contacts))  # Expected: Contact added.
+    # # Test 1: Successful addition
+    # print(add_contact(["Bob", "0501234356"], test_contacts))  # Expected: Contact added.
     
-    # Test 2: ValueError (missing phone number argument)
-    print(add_contact(["Alice"], test_contacts))               # Expected: Give me name and phone please.
+    # # Test 2: ValueError (missing phone number argument)
+    # print(add_contact(["Alice"], test_contacts))               # Expected: Give me name and phone please.
     
-    # Test 3: IndexError (missing argument for phone command)
-    print(show_phone([], test_contacts))                       # Expected: Enter the argument for the command.
+    # # Test 3: IndexError (missing argument for phone command)
+    # print(show_phone([], test_contacts))                       # Expected: Enter the argument for the command.
     
-    # Test 4: Successful retrieval
-    print(show_phone(["Bob"], test_contacts))                  # Expected: Bob: 0501234356
+    # # Test 4: Successful retrieval
+    # print(show_phone(["Bob"], test_contacts))                  # Expected: Bob: 0501234356
     
-    # Test 5: KeyError (contact does not exist)
-    print(show_phone(["Charlie"], test_contacts))              # Expected: Contact not found. Please check the name.
+    # # Test 5: KeyError (contact does not exist)
+    # print(show_phone(["Charlie"], test_contacts))              # Expected: Contact not found. Please check the name.
     
-    # Test 6: Show all contacts
-    print(show_all(test_contacts))
+    # # Test 6: Show all contacts
+    # print(show_all(test_contacts)) 
+
+    # # Test 7: Change non-existent contact (triggers natural KeyError)
+    # print(change_contact(["Charlie", "1112223344"], test_contacts)) # Expected: Contact not found. Please check the name.

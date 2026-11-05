@@ -8,8 +8,8 @@ def generator_numbers(text: str) -> Generator[float, None, None]:
     that are clearly separated by spaces on both sides, and yields them as floats.
     """
     # Regular expression to find real numbers clearly separated by spaces.
-    # \b ensures we match word boundaries, and we look for digits with an optional decimal part.
-    pattern = r"\b\d+(?:\.\d+)?\b"
+    # (?<=\s) ensures there is a space before the number, and (?=\s) ensures a space after.
+    pattern = r"(?<=\s)\d+(?:\.\d+)?(?=\s)"
     
     # Find all matches in the text
     for match in re.finditer(pattern, text):
